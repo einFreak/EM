@@ -1,0 +1,164 @@
+C166 COMPILER V7.57.0, BLINKCODE                                                           10/23/2019 13:02:31 PAGE 1   
+
+
+C166 COMPILER V7.57.0, COMPILATION OF MODULE BLINKCODE
+OBJECT MODULE PLACED IN .\Objects\BlinkCode.obj
+COMPILER INVOKED BY: C:\Keil_v5\C166\BIN\C166.EXE BlinkCode.c MODV2 BROWSE MODV2 DEBUG PRINT(.\Listings\BlinkCode.lst) T
+                    -ABS(2) OBJECT(.\Objects\BlinkCode.obj) 
+
+ stmt lvl     source
+
+    1         // File: Blinken.c - Blinken einer DIODE
+    2         //
+    3         // XE167.h muss eingebunden werden, weil dann die symbolischen
+    4         // Namen wie z.B. P10_OUT_P0 verwendet werden können und nicht
+    5         // Adresse von P10_OUT_P0 verwendet werden muss!
+    6         //
+    7         #include <XE167F.h>
+    8         volatile unsigned int counter1,counter2;
+    9         // Funktion wait() braucht ~1 sek.
+   10         
+   11         void wait()
+   12         {
+   13  1        counter1 = 0x40*0.15;
+   14  1        while (counter1 > 0)
+   15  1        {
+   16  2          counter1--;
+   17  2          counter2 = 0xFFFF;
+   18  2          while (counter2 > 0)
+   19  2          {
+   20  3          counter2--;
+   21  3          }
+   22  2        }
+   23  1      }
+   24         
+   25         void led0 () {P10_OUT_P0 = ~P10_OUT_P0;}
+   26         void led1 () {P10_OUT_P1 = ~P10_OUT_P1;}
+   27         void led2 () {P10_OUT_P2 = ~P10_OUT_P2;}
+   28         void led3 () {P10_OUT_P3 = ~P10_OUT_P3;}
+   29         void led4 () {P10_OUT_P4 = ~P10_OUT_P4;}
+   30         void led5 () {P10_OUT_P5 = ~P10_OUT_P5;}
+   31         void led6 () {P10_OUT_P6 = ~P10_OUT_P6;}
+   32         void led7 () {P10_OUT_P7 = ~P10_OUT_P7;}
+   33         
+   34         void ledaus () {
+   35  1        P10_OUT = 0xFFFF;
+   36  1      }
+   37         
+   38         //Working
+   39         void blinkrb() {
+   40  1        int mask  = 0xFFFF;
+   41  1        int blink = 0x0001;
+   42  1        int i;
+   43  1        
+   44  1        ledaus();
+   45  1        P10_OUT = mask ^ blink;
+   46  1        wait();
+   47  1        for (i=0; i < 8; i++)
+   48  1        {
+   49  2          blink = blink<<1;
+   50  2          P10_OUT = mask ^ blink;
+   51  2          wait();
+   52  2        }
+   53  1        ledaus();
+   54  1      } 
+C166 COMPILER V7.57.0, BLINKCODE                                                           10/23/2019 13:02:31 PAGE 2   
+
+   55         
+   56         //Working
+   57         void blinklb() {
+   58  1        int i;
+   59  1        int mask = 0xFFFF;
+   60  1        int blink = 0x0080;
+   61  1        
+   62  1        ledaus();
+   63  1        P10_OUT = mask ^ blink;
+   64  1        wait();
+   65  1        for (i=0; i < 8; i++)
+   66  1        {
+   67  2          blink = blink/2;
+   68  2          //blink = blink>>1;
+   69  2          P10_OUT = mask ^ blink;
+   70  2          wait();
+   71  2        }
+   72  1        ledaus();
+   73  1      }
+   74         
+   75         //von Außen nach Mitte und wieder raus
+   76         void blinkmb() {
+   77  1        int mask = 0xFFFF;
+   78  1        ledaus();
+   79  1        wait();
+   80  1        P10_OUT = mask ^ 0x0081;
+   81  1        wait();
+   82  1        P10_OUT = mask ^ 0x0042;
+   83  1        wait();
+   84  1        P10_OUT = mask ^ 0x0024;
+   85  1        wait();
+   86  1        P10_OUT = mask ^ 0x0018;
+   87  1        wait();
+   88  1        P10_OUT = mask ^ 0x0024;
+   89  1        wait();
+   90  1        P10_OUT = mask ^ 0x0042;
+   91  1        wait();
+   92  1        P10_OUT = mask ^ 0x0081;
+   93  1        wait();
+   94  1        ledaus();
+   95  1      }
+   96         
+   97         
+   98         
+   99         void main(void)
+  100         {
+  101  1      
+  102  1      // Initialize IO
+  103  1      // Pin 0-7 von Port 10 auf "OUT"
+  104  1      P10_IOCR00 = 0x0080;
+  105  1      P10_IOCR01 = 0x0080;
+  106  1      P10_IOCR02 = 0x0080;
+  107  1      P10_IOCR03 = 0x0080;
+  108  1      P10_IOCR04 = 0x0080;
+  109  1      P10_IOCR05 = 0x0080;
+  110  1      P10_IOCR06 = 0x0080;
+  111  1      P10_IOCR07 = 0x0080;
+  112  1      
+  113  1      //Pin 2-5 von Port 4 auf "IN"
+  114  1      P4_IOCR02  = 0x0020;
+  115  1      P4_IOCR03  = 0x0020;
+  116  1      P4_IOCR04  = 0x0020;
+C166 COMPILER V7.57.0, BLINKCODE                                                           10/23/2019 13:02:31 PAGE 3   
+
+  117  1      P4_IOCR05  = 0x0020;
+  118  1      
+  119  1      ledaus();
+  120  1      // Wichtig: einfügen einer „Endlosschleife“
+  121  1      
+  122  1      while (1) {
+  123  2      
+  124  2        if (P4_IN_P2) blinkrb();
+  125  2        if (P4_IN_P3) blinklb();
+  126  2        if (P4_IN_P4) blinkmb();
+  127  2      
+  128  2      }
+  129  1      }
+
+
+MODULE INFORMATION:   INITIALIZED  UNINITIALIZED
+  CODE SIZE        =         298     --------
+  NEAR-CONST SIZE  =    --------     --------
+  FAR-CONST SIZE   =    --------     --------
+  HUGE-CONST SIZE  =    --------     --------
+  XHUGE-CONST SIZE =    --------     --------
+  NEAR-DATA SIZE   =           4     --------
+  FAR-DATA SIZE    =    --------     --------
+  XHUGE-DATA SIZE  =    --------     --------
+  IDATA-DATA SIZE  =    --------     --------
+  SDATA-DATA SIZE  =    --------     --------
+  BDATA-DATA SIZE  =    --------     --------
+  HUGE-DATA SIZE   =    --------     --------
+  BIT SIZE         =    --------     --------
+  INIT'L SIZE      =    --------     --------
+END OF MODULE INFORMATION.
+
+
+C166 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
