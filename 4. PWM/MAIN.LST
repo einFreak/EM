@@ -1,0 +1,428 @@
+C166 COMPILER V7.57.0, MAIN                                                                11/13/2019 12:47:20 PAGE 1   
+
+
+C166 COMPILER V7.57.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN MAIN.OBJ
+COMPILER INVOKED BY: C:\Keil_v5\C166\BIN\C166.EXE MAIN.c MODV2 BROWSE MODV2 DEBUG TABS(2) 
+
+ stmt lvl     source
+
+    1         //****************************************************************************
+    2         // @Module        Project Settings
+    3         // @Filename      MAIN.c
+    4         // @Project       PWM.dav
+    5         //----------------------------------------------------------------------------
+    6         // @Controller    Infineon XE169FH-200F100
+    7         //
+    8         // @Compiler      Keil
+    9         //
+   10         // @Codegenerator 2.1
+   11         //
+   12         // @Description   This file contains the project initialization function.
+   13         //
+   14         //----------------------------------------------------------------------------
+   15         // @Date          13.11.2019 12:47:13
+   16         //
+   17         //****************************************************************************
+   18         
+   19         // USER CODE BEGIN (MAIN_General,1)
+   20         
+   21         // USER CODE END
+   22         
+   23         
+   24         
+   25         //****************************************************************************
+   26         // @Project Includes
+   27         //****************************************************************************
+   28         
+   29         #include "MAIN.h"
+   30         
+   31         // USER CODE BEGIN (MAIN_General,2)
+   32         
+   33         // USER CODE END
+   34         
+   35         
+   36         //****************************************************************************
+   37         // @Macros
+   38         //****************************************************************************
+   39         
+   40         // USER CODE BEGIN (MAIN_General,3)
+   41         
+   42         // USER CODE END
+   43         
+   44         
+   45         //****************************************************************************
+   46         // @Defines
+   47         //****************************************************************************
+   48         
+   49         // USER CODE BEGIN (MAIN_General,4)
+   50         
+   51         // USER CODE END
+   52         
+   53         
+   54         //****************************************************************************
+   55         // @Typedefs
+C166 COMPILER V7.57.0, MAIN                                                                11/13/2019 12:47:20 PAGE 2   
+
+   56         //****************************************************************************
+   57         
+   58         // USER CODE BEGIN (MAIN_General,5)
+   59         
+   60         // USER CODE END
+   61         
+   62         
+   63         //****************************************************************************
+   64         // @Imported Global Variables
+   65         //****************************************************************************
+   66         
+   67         // USER CODE BEGIN (MAIN_General,6)
+   68         
+   69         // USER CODE END
+   70         
+   71         
+   72         //****************************************************************************
+   73         // @Global Variables
+   74         //****************************************************************************
+   75         
+   76         // USER CODE BEGIN (MAIN_General,7)
+   77         
+   78         // USER CODE END
+   79         
+   80         
+   81         //****************************************************************************
+   82         // @External Prototypes
+   83         //****************************************************************************
+   84         
+   85         // USER CODE BEGIN (MAIN_General,8)
+   86         
+   87         // USER CODE END
+   88         
+   89         
+   90         //****************************************************************************
+   91         // @Prototypes Of Local Functions
+   92         //****************************************************************************
+   93         
+   94         // USER CODE BEGIN (MAIN_General,9)
+   95         
+   96         // USER CODE END
+   97         
+   98         
+   99         //****************************************************************************
+  100         // @Function      void MAIN_vInit(void) 
+  101         //
+  102         //----------------------------------------------------------------------------
+  103         // @Description   This function initializes the microcontroller.
+  104         //
+  105         //----------------------------------------------------------------------------
+  106         // @Returnvalue   None
+  107         //
+  108         //----------------------------------------------------------------------------
+  109         // @Parameters    None
+  110         //
+  111         //----------------------------------------------------------------------------
+  112         // @Date          13.11.2019
+  113         //
+  114         //****************************************************************************
+  115         
+  116         // USER CODE BEGIN (Init,1)
+  117         
+C166 COMPILER V7.57.0, MAIN                                                                11/13/2019 12:47:20 PAGE 3   
+
+  118         // USER CODE END
+  119         
+  120         void MAIN_vInit(void)
+  121         {
+  122  1        // USER CODE BEGIN (Init,2)
+  123  1      
+  124  1        // USER CODE END
+  125  1      
+  126  1        //   globally disable interrupts
+  127  1        PSW_IEN        =  0;          
+  128  1      
+  129  1      
+  130  1        ///  -----------------------------------------------------------------------
+  131  1        ///  Configuration of the System Clock:
+  132  1        ///  -----------------------------------------------------------------------
+  133  1        ///  - VCO clock used, input clock is connected
+  134  1        ///  - input frequency is 8,00 MHz
+  135  1        ///  - system clock is 100.00 MHz
+  136  1      
+  137  1        MAIN_vUnlockProtecReg();     // unlock write security
+  138  1      
+  139  1        MAIN_vChangeFreq();          // load PLL control register
+  140  1      
+  141  1        //   -----------------------------------------------------------------------
+  142  1        //   SCU Interrupt Disable configuration:
+  143  1        //   -----------------------------------------------------------------------
+  144  1        SCU_INTDIS     =  0xFFFF;      // SCU Interrupt Disable Register
+  145  1      
+  146  1        //   -----------------------------------------------------------------------
+  147  1        //   Initialization of the Peripherals:
+  148  1        //   -----------------------------------------------------------------------
+  149  1      
+  150  1        //   initializes the Parallel Ports
+  151  1        IO_vInit();
+  152  1      
+  153  1        //   initializes the Capture / Compare Unit 2 (CAPCOM2)
+  154  1        CC2_vInit();
+  155  1      
+  156  1      
+  157  1        //   -----------------------------------------------------------------------
+  158  1        //   Initialization of the Bank Select registers:
+  159  1        //   -----------------------------------------------------------------------
+  160  1      
+  161  1      
+  162  1        //   -----------------------------------------------------------------------
+  163  1        //   SCU Interrupt Source Selection configuration:
+  164  1        //   -----------------------------------------------------------------------
+  165  1        SCU_ISSR       =  0x0000;      // SCU Interrupt Source Select Register
+  166  1      
+  167  1        SCU_ISSR1      =  0x0000;      // SCU Interrupt Source Select 1 Register
+  168  1      
+  169  1        SCU_ISSR2      =  0x0000;      // SCU Interrupt Source Select 2 Register
+  170  1      
+  171  1        // USER CODE BEGIN (Init,3)
+  172  1      
+  173  1        // USER CODE END
+  174  1      
+  175  1        MAIN_vLockProtecReg();       // lock write security
+  176  1      
+  177  1        //   globally enable interrupts
+  178  1        PSW_IEN        =  1;          
+  179  1      
+C166 COMPILER V7.57.0, MAIN                                                                11/13/2019 12:47:20 PAGE 4   
+
+  180  1      } //  End of function MAIN_vInit
+  181         
+  182         
+  183         //****************************************************************************
+  184         // @Function      void MAIN_vUnlockProtecReg(void) 
+  185         //
+  186         //----------------------------------------------------------------------------
+  187         // @Description   This function makes it possible to write one protected 
+  188         //                register.
+  189         //
+  190         //----------------------------------------------------------------------------
+  191         // @Returnvalue   None
+  192         //
+  193         //----------------------------------------------------------------------------
+  194         // @Parameters    None
+  195         //
+  196         //----------------------------------------------------------------------------
+  197         // @Date          13.11.2019
+  198         //
+  199         //****************************************************************************
+  200         
+  201         // USER CODE BEGIN (UnlockProtecReg,1)
+  202         
+  203         // USER CODE END
+  204         
+  205         void MAIN_vUnlockProtecReg(void)
+  206         {
+  207  1        uword uwPASSWORD;
+  208  1      
+  209  1          SCU_SLC = 0xAAAA;                   // command 0
+  210  1          SCU_SLC = 0x5554;                   // command 1
+  211  1      
+  212  1          uwPASSWORD = SCU_SLS & 0x00FF;
+  213  1          uwPASSWORD = (~uwPASSWORD) & 0x00FF;
+  214  1      
+  215  1          SCU_SLC = 0x9600 | uwPASSWORD;      // command 2
+  216  1          SCU_SLC = 0x0000;                   // command 3
+  217  1      
+  218  1      } //  End of function MAIN_vUnlockProtecReg
+  219         
+  220         
+  221         //****************************************************************************
+  222         // @Function      void MAIN_vLockProtecReg(void) 
+  223         //
+  224         //----------------------------------------------------------------------------
+  225         // @Description   This function makes it possible to lock one protected 
+  226         //                register.
+  227         //
+  228         //----------------------------------------------------------------------------
+  229         // @Returnvalue   None
+  230         //
+  231         //----------------------------------------------------------------------------
+  232         // @Parameters    None
+  233         //
+  234         //----------------------------------------------------------------------------
+  235         // @Date          13.11.2019
+  236         //
+  237         //****************************************************************************
+  238         
+  239         // USER CODE BEGIN (LockProtecReg,1)
+  240         
+  241         // USER CODE END
+C166 COMPILER V7.57.0, MAIN                                                                11/13/2019 12:47:20 PAGE 5   
+
+  242         
+  243         void MAIN_vLockProtecReg(void)
+  244         {
+  245  1        uword uwPASSWORD;
+  246  1      
+  247  1          SCU_SLC = 0xAAAA;                   // command 0
+  248  1          SCU_SLC = 0x5554;                   // command 1
+  249  1      
+  250  1          uwPASSWORD = SCU_SLS & 0x00FF;
+  251  1          uwPASSWORD = (~uwPASSWORD) & 0x00FF;
+  252  1      
+  253  1          SCU_SLC = 0x9600 | uwPASSWORD;      // command 2
+  254  1          SCU_SLC = 0x1800;                   // command 3; new PASSWOR is 0x00
+  255  1      
+  256  1          uwPASSWORD = SCU_SLS & 0x00FF;
+  257  1          uwPASSWORD = (~uwPASSWORD) & 0x00FF;
+  258  1          SCU_SLC = 0x8E00 | uwPASSWORD;      // command 4
+  259  1      
+  260  1      } //  End of function MAIN_vLockProtecReg
+  261         
+  262         
+  263         //****************************************************************************
+  264         // @Function      void MAIN_vChangeFreq(void) 
+  265         //
+  266         //----------------------------------------------------------------------------
+  267         // @Description   This function is used to select the external crystal and
+  268         //                configure the system frequency to 100MHz/80MHz/66MHz.
+  269         //
+  270         //----------------------------------------------------------------------------
+  271         // @Returnvalue   None
+  272         //
+  273         //----------------------------------------------------------------------------
+  274         // @Parameters    None
+  275         //
+  276         //----------------------------------------------------------------------------
+  277         // @Date          13.11.2019
+  278         //
+  279         //****************************************************************************
+  280         
+  281         // USER CODE BEGIN (ChangeFreq,1)
+  282         
+  283         // USER CODE END
+  284         
+  285         void MAIN_vChangeFreq(void)
+  286         {
+  287  1        Scs_ErrorType Error;
+  288  1      
+  289  1        Scs_EnableHighPrecOsc(1U);
+  290  1      
+  291  1        //For application and internal application resets, the complete PLL configuration could be avoided
+  292  1        //The entry from application resets and internal application reset is covered in the following different
+             -iation
+  293  1        //in int/ext clock in lock/unlocked state.
+  294  1      
+  295  1        if  ((SCU_PLLSTAT & 0x0004) == 0x0004)       // fR derived from Internal clock
+  296  1        {
+  297  2          //Normal startup state during boot and the clock
+  298  2          //has to be in the next step configured on the external crystal
+  299  2          //use XTAL/VCO, count XTAL clock
+  300  2      
+  301  2          Scs_InitTimer();       // initialize CCU6 timer T13 for SCS driver
+  302  2      
+C166 COMPILER V7.57.0, MAIN                                                                11/13/2019 12:47:20 PAGE 6   
+
+  303  2          // perform transition from base mode to normal mode, check for error
+  304  2          Error = Scs_GoFromBaseModeToNormalMode();
+  305  2          if(Error)
+  306  2          {
+  307  3            for(;;)      // this part of code should not be reached
+  308  3            {
+  309  4              NOP();
+  310  4            }
+  311  3          }
+  312  2      
+  313  2          if ((SCU_PLLSTAT & 0x1009) == 0x1009)      // fR derived from external crystal clock + VCO is locked
+  314  2          {
+  315  3            //usually after an application reset where clock need not be configured again.
+  316  3            //check K2/P/N values and decide whether these values have to be adapted based on application needs.
+  317  3            NOP();
+  318  3            //usually the PLL losss of Lock TRAP schould be enabled here.
+  319  3          }
+  320  2          else       //fR derived from external crystal clock + VCO is not locked
+  321  2          {
+  322  3                     //estimate the K1 value and the current frequency
+  323  3                     //reduce K2/P/N values in steps so that the frequency
+  324  3                     //jumps is limited to 20MHz or factor of 5 whichever is minimum
+  325  3            NOP();
+  326  3          }
+  327  2      
+  328  2      
+  329  2        }
+  330  1      
+  331  1      } //  End of function MAIN_vChangeFreq
+  332         
+  333         
+  334         //****************************************************************************
+  335         // @Function      void main(void) 
+  336         //
+  337         //----------------------------------------------------------------------------
+  338         // @Description   This is the main function.
+  339         //
+  340         //----------------------------------------------------------------------------
+  341         // @Returnvalue   None
+  342         //
+  343         //----------------------------------------------------------------------------
+  344         // @Parameters    None
+  345         //
+  346         //----------------------------------------------------------------------------
+  347         // @Date          13.11.2019
+  348         //
+  349         //****************************************************************************
+  350         
+  351         // USER CODE BEGIN (Main,1)
+  352         
+  353         // USER CODE END
+  354         
+  355         void main(void)
+  356         {
+  357  1        // USER CODE BEGIN (Main,2)
+  358  1      
+  359  1        // USER CODE END
+  360  1      
+  361  1        MAIN_vInit();
+  362  1      
+  363  1        // USER CODE BEGIN (Main,3)
+  364  1      
+C166 COMPILER V7.57.0, MAIN                                                                11/13/2019 12:47:20 PAGE 7   
+
+  365  1        // USER CODE END
+  366  1      
+  367  1        while(1)
+  368  1        {
+  369  2      
+  370  2         // USER CODE BEGIN (Main,4)
+  371  2          //P10_OUT = CC2_CC16;
+  372  2          P10_OUT = CC2_OUT;
+  373  2         // USER CODE END
+  374  2      
+  375  2        }
+  376  1      
+  377  1      } //  End of function main
+  378         
+  379         
+  380         
+  381         // USER CODE BEGIN (MAIN_General,10)
+  382         
+  383         // USER CODE END
+  384         
+  385         
+
+
+MODULE INFORMATION:   INITIALIZED  UNINITIALIZED
+  CODE SIZE        =         222     --------
+  NEAR-CONST SIZE  =    --------     --------
+  FAR-CONST SIZE   =    --------     --------
+  HUGE-CONST SIZE  =    --------     --------
+  XHUGE-CONST SIZE =    --------     --------
+  NEAR-DATA SIZE   =    --------     --------
+  FAR-DATA SIZE    =    --------     --------
+  XHUGE-DATA SIZE  =    --------     --------
+  IDATA-DATA SIZE  =    --------     --------
+  SDATA-DATA SIZE  =    --------     --------
+  BDATA-DATA SIZE  =    --------     --------
+  HUGE-DATA SIZE   =    --------     --------
+  BIT SIZE         =    --------     --------
+  INIT'L SIZE      =    --------     --------
+END OF MODULE INFORMATION.
+
+
+C166 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
