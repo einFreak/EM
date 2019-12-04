@@ -65,8 +65,7 @@
 //****************************************************************************
 
 // USER CODE BEGIN (CC2_General,6)
-extern int global_Timer100ns;
-extern int global_Timer50us;
+
 // USER CODE END
 
 
@@ -297,14 +296,6 @@ void CC2_vInit(void)
 // USER CODE BEGIN (Tmr7,1)
 
 // USER CODE END
-
-void CC2_viTmr7(void) interrupt CC2_T7INT
-{
-  // USER CODE BEGIN (Tmr7,2)
-  //T7 soll im 100ns Takt zählen
-	global_Timer100ns++;
-  // USER CODE END
-} //  End of function CC2_viTmr7
 
 
 

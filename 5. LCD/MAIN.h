@@ -13,7 +13,7 @@
 //                the MAIN module.
 //
 //----------------------------------------------------------------------------
-// @Date          27.11.2019 13:00:45
+// @Date          04.12.2019 12:41:58
 //
 //****************************************************************************
 
@@ -122,7 +122,7 @@ void MAIN_vChangeFreq(void);
 #include  "IO.h"
 #include  "GPT1.h"
 #include  "GPT2.h"
-#include  "CC2.h"
+#include  "ADC0.h"
 
 // USER CODE BEGIN (MAIN_Header,10)
 

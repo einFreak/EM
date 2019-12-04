@@ -1,4 +1,4 @@
-C166 COMPILER V7.57.0, GPT1                                                                11/27/2019 12:44:10 PAGE 1   
+C166 COMPILER V7.57.0, GPT1                                                                12/04/2019 13:09:57 PAGE 1   
 
 
 C166 COMPILER V7.57.0, COMPILATION OF MODULE GPT1
@@ -22,7 +22,7 @@ COMPILER INVOKED BY: C:\Keil_v5\C166\BIN\C166.EXE GPT1.c MODV2 BROWSE MODV2 DEBU
    12         // @Description   This file contains functions that use the GPT1 module.
    13         //
    14         //----------------------------------------------------------------------------
-   15         // @Date          27.11.2019 12:17:30
+   15         // @Date          04.12.2019 12:41:59
    16         //
    17         //****************************************************************************
    18         
@@ -62,7 +62,7 @@ COMPILER INVOKED BY: C:\Keil_v5\C166\BIN\C166.EXE GPT1.c MODV2 BROWSE MODV2 DEBU
    52         
    53         
    54         //****************************************************************************
-C166 COMPILER V7.57.0, GPT1                                                                11/27/2019 12:44:10 PAGE 2   
+C166 COMPILER V7.57.0, GPT1                                                                12/04/2019 13:09:57 PAGE 2   
 
    55         // @Typedefs
    56         //****************************************************************************
@@ -123,10 +123,10 @@ COMPILER INVOKED BY: C:\Keil_v5\C166\BIN\C166.EXE GPT1.c MODV2 BROWSE MODV2 DEBU
   111         // @Parameters    None
   112         //
   113         //----------------------------------------------------------------------------
-  114         // @Date          27.11.2019
+  114         // @Date          04.12.2019
   115         //
   116         //****************************************************************************
-C166 COMPILER V7.57.0, GPT1                                                                11/27/2019 12:44:10 PAGE 3   
+C166 COMPILER V7.57.0, GPT1                                                                12/04/2019 13:09:57 PAGE 3   
 
   117         
   118         // USER CODE BEGIN (Init,1)
@@ -190,7 +190,7 @@ COMPILER INVOKED BY: C:\Keil_v5\C166\BIN\C166.EXE GPT1.c MODV2 BROWSE MODV2 DEBU
   176  1        ///  - prescaler factor is 8
   177  1        ///  - up/down control bit is reset
   178  1        ///  - timer 4 run bit is reset
-C166 COMPILER V7.57.0, GPT1                                                                11/27/2019 12:44:10 PAGE 4   
+C166 COMPILER V7.57.0, GPT1                                                                12/04/2019 13:09:57 PAGE 4   
 
   179  1      
   180  1        GPT12E_T4CON   =  0x0000;      // load timer 4 control register

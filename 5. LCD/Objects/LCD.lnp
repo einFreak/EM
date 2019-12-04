@@ -3,7 +3,9 @@
 ".\Objects\SCS.obj",
 ".\Objects\GPT1.obj",
 ".\Objects\GPT2.obj",
-".\Objects\IO.obj" 
+".\Objects\IO.obj",
+".\Objects\CC2.obj",
+".\Objects\ADC0.obj" 
 TO ".\Objects\LCD" 
 PRINT(".\Listings\LCD.m66") VECTAB (0x0c00000) 
 CLASSES (ICODE (0xC00000-0xC0EFFF), NCODE (0xC00000-0xC0EFFF), 

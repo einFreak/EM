@@ -12,7 +12,7 @@
 // @Description   This file contains functions that use the IO module.
 //
 //----------------------------------------------------------------------------
-// @Date          27.11.2019 13:00:46
+// @Date          04.12.2019 12:41:59
 //
 //****************************************************************************
 
@@ -111,7 +111,7 @@
 // @Parameters    None
 //
 //----------------------------------------------------------------------------
-// @Date          27.11.2019
+// @Date          04.12.2019
 //
 //****************************************************************************
 
@@ -176,8 +176,7 @@ void IO_vInit(void)
   ///  -----------------------------------------------------------------------
   ///  Configuration of Port P5:
   ///  -----------------------------------------------------------------------
-  ///  - no pin of port P5 is used
-  ///  - Port5 Data register P5(Read only)
+  ///  P5.0 is used as alternate input for the  Analog Input Pin (AN50)
 
 
   ///  -----------------------------------------------------------------------
@@ -244,8 +243,21 @@ void IO_vInit(void)
   ///  -----------------------------------------------------------------------
   ///  Configuration of Port P10:
   ///  -----------------------------------------------------------------------
-  ///  - no pin of port P10 is used
+  ///  P10.0 is used as general purpose output
+  ///  - push/pull output is selected
+  ///  - the pin status is low level
 
+  ///  P10.0 - P10.3 output driver characteristic: strong driver
+  ///  P10.4 - P10.7 output driver characteristic: strong driver
+  ///  P10.8 - P10.11 output driver characteristic: strong driver
+  ///  P10.12 - P10.15 output driver characteristic: strong driver
+
+  ///  P10.0 - P10.3 output edge characteristic: sharp edge mode
+  ///  P10.4 - P10.7 output edge characteristic: sharp edge mode
+  ///  P10.8 - P10.11 output edge characteristic: sharp edge mode
+  ///  P10.12 - P10.15 output edge characteristic: sharp edge mode
+
+  P10_IOCR00     =  0x0080;      // load port control register 0
 
   ///  -----------------------------------------------------------------------
   ///  Configuration of Port P11:

@@ -8,7 +8,7 @@
 \par \plain\f4\fs22\cf0 Compiler: \tab\tab\b Keil
 \par \plain\f4\fs22\cf0 Memory Model: \tab\b SMALL
 \par 
-\par \plain\f4\fs22\cf0 Date: \tab\tab\tab\b 27.11.2019 13:00:46
+\par \plain\f4\fs22\cf0 Date: \tab\tab\tab\b 04.12.2019 12:42:00
 \par 
 \par 
 \par \plain\f4\fs22\cf2\b Please read this document carefully and note
@@ -31,8 +31,8 @@
 \par \tab\tab\tab GPT1.C
 \par \tab\tab\tab GPT2.H
 \par \tab\tab\tab GPT2.C
-\par \tab\tab\tab CC2.H
-\par \tab\tab\tab CC2.C
+\par \tab\tab\tab ADC0.H
+\par \tab\tab\tab ADC0.C
 \par 
 \par 
 \par \plain\f4\fs20\cf0
@@ -426,8 +426,7 @@
 \tab - no pin of port P4 is used\par 
 \par 
 \tab Configuration of Port P5:\par 
-\tab - no pin of port P5 is used\par 
-\tab - Port5 Data register P5(Read only)\par 
+\tab P5.0 is used as alternate input for the  Analog Input Pin (AN50)\par 
 \par 
 \tab Configuration of Port P6:\par 
 \tab - no pin of port P6 is used\par 
@@ -471,7 +470,19 @@
 \tab P9.4 - P9.7 output edge characteristic: sharp edge mode\par 
 \par 
 \tab Configuration of Port P10:\par 
-\tab - no pin of port P10 is used\par 
+\tab P10.0 is used as general purpose output\par 
+\tab - push/pull output is selected\par 
+\tab - the pin status is low level\par 
+\par 
+\tab P10.0 - P10.3 output driver characteristic: strong driver\par 
+\tab P10.4 - P10.7 output driver characteristic: strong driver\par 
+\tab P10.8 - P10.11 output driver characteristic: strong driver\par 
+\tab P10.12 - P10.15 output driver characteristic: strong driver\par 
+\par 
+\tab P10.0 - P10.3 output edge characteristic: sharp edge mode\par 
+\tab P10.4 - P10.7 output edge characteristic: sharp edge mode\par 
+\tab P10.8 - P10.11 output edge characteristic: sharp edge mode\par 
+\tab P10.12 - P10.15 output edge characteristic: sharp edge mode\par 
 \par 
 \tab Configuration of Port P11:\par 
 \tab - no pin of port P11 is used\par 
@@ -579,58 +590,19 @@
 \tab \tab None
 
 \par
-\par \plain\f4\fs24\cf0 Initialization:
-\par \plain\f4\fs20\cf0\b
-\par
-\tab Configuration of Timer Block Prescaler 2:\par 
-\tab - prescaler for timer block 2 is 4\par 
-\par 
-\tab Configuration of the GPT2 Core Timer 5:\par 
-\tab - timer 5 works in counter mode\par 
-\tab - timer 5 is disabled\par 
-\tab - up/down control bit is reset\par 
-\tab - external up/down control is disabled\par 
-\tab - timer 5 run bit is reset\par 
-\tab - timer 5 remote control is disabled\par 
-\par 
-\tab Configuration of the GPT2 Core Timer 6:\par 
-\tab - timer 6 works in timer mode\par 
-\tab - prescaler factor is 4\par 
-\tab - up/down control bit is reset\par 
-\tab - external up/down control is disabled\par 
-\tab - alternate output function T6OUT (P6.2) is disabled\par 
-\tab - alternate output function T6OUT (P7.0) is disabled\par 
-\tab - alternate output function T6OUT (P13.7) is disabled\par 
-\tab - timer 6 output toggle latch (T6OTL) is set to 0\par 
-\tab - timer 6 run bit is reset\par 
-\tab - timer 6 is not cleared on a capture\par 
-\par 
-\tab Configuration of the GPT2 CAPREL:\par 
-\tab - capture T5 into CAPREL is disabled\par 
-\tab - capture trigger from pin CAPIN\par 
-\tab - capure is disabled\par 
-\tab - timer 5 is not cleared on a capture\par 
-\par 
-\tab Configuration of the used GPT2 Port Pins:\par 
-\par 
-\tab Configuration of the used GPT2 Interrupts:\par 
-\par 
-
-\par \plain\f4\fs20\cf0
-\par \plain\f4\fs28\cf0\ul Capture / Compare Unit 2 (CAPCOM2)
-\par
-\par \plain\f4\fs24\cf0 Macros:\f4\fs20\cf0
-\par \plain\f4\fs24\cf0 Functions:\f4\fs20\cf0
-\par
 \par \plain\f4\fs20\cf0 \tab Function:
-\par \plain\f4\fs20\cf0\b \tab \tab void CC2_vInit(void)\plain\f4\fs20\cf0
+\par \plain\f4\fs20\cf0\b \tab \tab void GPT2_viTmr6(void)\plain\f4\fs20\cf0
 \par \tab Description:
 \par \plain\f4\fs20\cf0\i
-\tab \tab This is the initialization function of the CAPCOM2 function
+\tab \tab This is the interrupt service routine for the GPT2 timer 6.
 
-\par \tab \tab library. It is assumed that the SFRs used by this library
+\par \tab \tab It is called up in the case of over or underflow of the
 
-\par \tab \tab are in reset state.
+\par \tab \tab timer 6 register.
+
+\par \tab \tab Please note that you have to add application specific code
+
+\par \tab \tab to this function.
 
 \par \plain\f4\fs20\cf0 \tab Returnvalue:
 \par \tab \tab \plain\f4\fs20\cf0\b None\plain\f4\fs20\cf0
@@ -640,14 +612,14 @@
 
 \par
 \par \plain\f4\fs20\cf0 \tab Function:
-\par \plain\f4\fs20\cf0\b \tab \tab void CC2_viTmr7(void)\plain\f4\fs20\cf0
+\par \plain\f4\fs20\cf0\b \tab \tab void GPT2_viTmr5(void)\plain\f4\fs20\cf0
 \par \tab Description:
 \par \plain\f4\fs20\cf0\i
-\tab \tab This is the interrupt service routine for the CAPCOM2 timer
+\tab \tab This is the interrupt service routine for the GPT2 timer 5.
 
-\par \tab \tab 7. It is called when overflow of the timer 7 register
+\par \tab \tab It is called up in the case of over or underflow of the
 
-\par \tab \tab occurs.
+\par \tab \tab timer 5 register.
 
 \par \tab \tab Please note that you have to add application specific code
 
@@ -663,82 +635,241 @@
 \par \plain\f4\fs24\cf0 Initialization:
 \par \plain\f4\fs20\cf0\b
 \par
-\tab Configuration of  Kernel state configuration Control:\par 
-\tab - the Peripheral is supplied with clock signal for CAPCOM2 unit\par 
-\tab - the CC2 module clock = 100,00 MHz\par 
+\tab Configuration of Timer Block Prescaler 2:\par 
+\tab - prescaler for timer block 2 is 2\par 
 \par 
-\tab Configuration of CAPCOM2 Control:\par 
-\tab - staggered mode is enabled\par 
+\tab Configuration of the GPT2 Core Timer 5:\par 
+\tab - timer 5 works in timer mode\par 
+\tab - prescaler factor is 2\par 
+\tab - up/down control bit is reset\par 
+\tab - external up/down control is disabled\par 
+\tab - timer 5 remote control is disabled\par 
 \par 
-\tab Configuration of CAPCOM2 Timer 7:\par 
-\tab - timer 7 works in timer mode\par 
-\tab - prescaler factor is 8\par 
-\tab - timer 7 run bit is reset\par 
+\tab Configuration of the GPT2 Core Timer 6:\par 
+\tab - timer 6 works in timer mode\par 
+\tab - prescaler factor is 2\par 
+\tab - up/down control bit is reset\par 
+\tab - external up/down control is disabled\par 
+\tab - alternate output function T6OUT (P6.2) is disabled\par 
+\tab - alternate output function T6OUT (P7.0) is disabled\par 
+\tab - alternate output function T6OUT (P13.7) is disabled\par 
+\tab - timer 6 output toggle latch (T6OTL) is set to 0\par 
+\tab - timer 6 is not cleared on a capture\par 
 \par 
-\tab Configuration of CAPCOM2 Timer 8:\par 
-\tab - timer 8 works in timer mode\par 
-\tab - prescaler factor is 8\par 
-\tab - timer 8 run bit is reset\par 
+\tab Configuration of the GPT2 CAPREL:\par 
+\tab - capture T5 into CAPREL is disabled\par 
+\tab - capture trigger from pin CAPIN\par 
+\tab - capure is disabled\par 
+\tab - timer 5 is not cleared on a capture\par 
 \par 
-\tab Configuration of the used CAPCOM2 Timer Port Pins:\par 
+\tab Configuration of the used GPT2 Port Pins:\par 
 \par 
-\tab Configuration of the used CAPCOM2 Timer Interrupts:\par 
-\tab Tmr7 service request node configuration:\par 
-\tab - Tmr7 interrupt priority level (ILVL) = 1\par 
-\tab - Tmr7 interrupt group level (GLVL) = 0\par 
-\tab - Tmr7 group priority extension (GPX) = 0\par 
+\tab Configuration of the used GPT2 Interrupts:\par 
+\tab timer 5 service request node configuration:\par 
+\tab - timer 5 interrupt priority level (ILVL) = 1\par 
+\tab - timer 5 interrupt group level (GLVL) = 0\par 
+\tab - timer 5 group priority extension (GPX) = 0\par 
 \par 
-\tab Configuration of the used CAPCOM2 Channel 16:\par 
-\tab - channel 16 is disabled\par 
+\tab timer 6 service request node configuration:\par 
+\tab - timer 6 interrupt priority level (ILVL) = 1\par 
+\tab - timer 6 interrupt group level (GLVL) = 1\par 
+\tab - timer 6 group priority extension (GPX) = 0\par 
 \par 
-\tab Configuration of the used CAPCOM2 Channel 17:\par 
-\tab - channel 17 is disabled\par 
+
+\par \plain\f4\fs20\cf0
+\par \plain\f4\fs28\cf0\ul Analog / Digital Converter  (ADC0)
+\par
+\par \plain\f4\fs24\cf0 Macros:\f4\fs20\cf0
+\par \plain\f4\fs24\cf0 Functions:\f4\fs20\cf0
+\par
+\par \plain\f4\fs20\cf0 \tab Function:
+\par \plain\f4\fs20\cf0\b \tab \tab void ADC0_vInit(void)\plain\f4\fs20\cf0
+\par \tab Description:
+\par \plain\f4\fs20\cf0\i
+\tab \tab This is the initialization function of the ADC function
+
+\par \tab \tab library. It is assumed that the SFRs used by this library
+
+\par \tab \tab are in reset state.
+
+\par \tab \tab Following SFR fields will be initialized:
+
+\par \tab \tab GLOBCTR  - Global Control
+
+\par \tab \tab RSPR0    - Priority and Arbitration Register
+
+\par \tab \tab ASENR    - Arbitration slot enable register
+
+\par \tab \tab CHCTRx   - Channel Control Register x
+
+\par \tab \tab RCRx     - Result Control Register x
+
+\par \tab \tab KSCFG    - Module configuration Register
+
+\par \tab \tab INPCR    - Input class Registers
+
+\par \tab \tab CHINPRx  - Channel Interrupt register
+
+\par \tab \tab EVINPRx  - Event Interrupt register
+
+\par \tab \tab SYNCTR   - Synchronisation control register
+
+\par \tab \tab LCBRx    - Limit check boundary register
+
+\par \tab \tab PISEL    - Port input selection
+
+\par \tab \tab QMR0     - Sequential 0 mode register
+
+\par \tab \tab CRMR1    - Parallel mode register
+
+\par \tab \tab QMR2     - Sequential 2 mode register
+
+\par \plain\f4\fs20\cf0 \tab Returnvalue:
+\par \tab \tab \plain\f4\fs20\cf0\b None\plain\f4\fs20\cf0
+\par \plain\f4\fs20\cf0 \tab Parameters:
+\par \plain\f4\fs20\cf0\b 
+\tab \tab None
+
+\par
+\par \plain\f4\fs24\cf0 Initialization:
+\par \plain\f4\fs20\cf0\b
+\par
+\tab Configuration of ADC0 kernel configuration register:\par 
 \par 
-\tab Configuration of the used CAPCOM2 Channel 18:\par 
-\tab - channel 18 is disabled\par 
+\tab - the ADC module clock is enabled\par 
+\tab - the ADC module clock = 100,00 MHz\par 
 \par 
-\tab Configuration of the used CAPCOM2 Channel 19:\par 
-\tab - channel 19 is disabled\par 
+\tab Configure global control register:\par 
+\tab --- Conversion Timing -----------------\par 
+\tab - Conversion time (CTC) = 00,85 us\par 
+\tab - Analog clock is 1/5th of module clock and digital clock is 1/1 times\par 
+\tab of module clock\par 
 \par 
-\tab Configuration of the used CAPCOM2 Channel 20:\par 
-\tab - channel 20 is disabled\par 
+\tab - the permanent arbitration mode is selected\par 
 \par 
-\tab Configuration of the used CAPCOM2 Channel 21:\par 
-\tab - channel 21 is disabled\par 
+\tab Configuration of Arbitration Slot enable register and also the Source\par 
+\tab Priority register:\par 
+\tab - Arbitration Slot 0 is enabled\par 
+\tab - Arbitration Slot 1 is enabled\par 
+\tab - Arbitration Slot 2 is enabled\par 
+\tab - the priority of request source 0 is low\par 
+\tab - the wait-for-start mode is selected for source 0\par 
+\tab - the priority of request source 1 is low\par 
+\tab - the wait-for-start mode is selected for source 1\par 
+\tab - the priority of request source 2 is low\par 
+\tab - the wait-for-start mode is selected for source 2\par 
 \par 
-\tab Configuration of the used CAPCOM2 Channel 22:\par 
-\tab - channel 22 is disabled\par 
+\tab Configuration of Channel Control Registers:\par 
+\tab Configuration of Channel 0\par 
+\tab - the result register0 is selected\par 
+\tab - the limit check 0 is selected\par 
+\tab - the reference voltage selected is Standard Voltage (Varef)\par 
+\tab - the input class selected is Input Class 0\par 
+\tab - LCBR0 is selected as upper boundary\par 
+\tab - LCBR1 is selected as lower boundary\par 
 \par 
-\tab Configuration of the used CAPCOM2 Channel 23:\par 
-\tab - channel 23 is disabled\par 
+\tab - No ADC0 Channels are selected\par 
 \par 
-\tab Configuration of the used CAPCOM2 Channel 24:\par 
-\tab - channel 24 is disabled\par 
+\tab Configuration of Sample Time and Resolution:\par 
 \par 
-\tab Configuration of the used CAPCOM2 Channel 25:\par 
-\tab - channel 25 is disabled\par 
+\tab 8 bit resolution selected\par 
 \par 
-\tab Configuration of the used CAPCOM2 Channel 26:\par 
-\tab - channel 26 is disabled\par 
+\tab 8 bit resolution selected\par 
 \par 
-\tab Configuration of the used CAPCOM2 Channel 27:\par 
-\tab - channel 27 is disabled\par 
+\tab Configuration of Result Control Registers:\par 
+\tab Configuration of Result Control Register 0\par 
+\tab - the data reduction filter is disabled\par 
+\tab - the event interrupt is disabled\par 
+\tab - the wait-for-read mode is enabled\par 
+\tab - the FIFO functionality is disabled\par 
 \par 
-\tab Configuration of the used CAPCOM2 Channel 28:\par 
-\tab - channel 28 is disabled\par 
+\tab Configuration of Result Control Register 1\par 
+\tab - the data reduction filter is disabled\par 
+\tab - the event interrupt is disabled\par 
+\tab - the wait-for-read mode is disabled\par 
+\tab - the FIFO functionality is disabled\par 
 \par 
-\tab Configuration of the used CAPCOM2 Channel 29:\par 
-\tab - channel 29 is disabled\par 
+\tab Configuration of Result Control Register 2\par 
+\tab - the data reduction filter is disabled\par 
+\tab - the event interrupt is disabled\par 
+\tab - the wait-for-read mode is disabled\par 
+\tab - the FIFO functionality is disabled\par 
 \par 
-\tab Configuration of the used CAPCOM2 Channel 30:\par 
-\tab - channel 30 is disabled\par 
+\tab Configuration of Result Control Register 3\par 
+\tab - the data reduction filter is disabled\par 
+\tab - the event interrupt is disabled\par 
+\tab - the wait-for-read mode is disabled\par 
+\tab - the FIFO functionality is disabled\par 
 \par 
-\tab Configuration of the used CAPCOM2 Channel 31:\par 
-\tab - channel 31 is disabled\par 
+\tab Configuration of Result Control Register 4\par 
+\tab - the data reduction filter is disabled\par 
+\tab - the event interrupt is disabled\par 
+\tab - the wait-for-read mode is disabled\par 
+\tab - the FIFO functionality is disabled\par 
 \par 
-\tab Configuration of the used CAPCOM2 Channel Port Pins:\par 
+\tab Configuration of Result Control Register 5\par 
+\tab - the data reduction filter is disabled\par 
+\tab - the event interrupt is disabled\par 
+\tab - the wait-for-read mode is disabled\par 
+\tab - the FIFO functionality is disabled\par 
 \par 
-\tab Configuration of the used CAPCOM2 Channels Interrupts:\par 
+\tab Configuration of Result Control Register 6\par 
+\tab - the data reduction filter is disabled\par 
+\tab - the event interrupt is disabled\par 
+\tab - the wait-for-read mode is disabled\par 
+\tab - the FIFO functionality is disabled\par 
+\par 
+\tab Configuration of Result Control Register 7\par 
+\tab - the data reduction filter is disabled\par 
+\tab - the event interrupt is disabled\par 
+\tab - the wait-for-read mode is disabled\par 
+\tab - the FIFO functionality is disabled\par 
+\par 
+\tab Configuration of Channel Interrupt Node Pointer Register:\par 
+\tab - the SR0 line become activated if channel 0 interrupt is generated\par 
+\par 
+\tab Configuration of Event Interrupt Node Pointer Register for Source\par 
+\tab Interrupts:\par 
+\tab - the SR 0 line become activated if the event 0 interrupt is generated\par 
+\tab - the SR 0 line become activated if the event 1 interrupt is generated\par 
+\tab - the SR 0 line become activated if the event 2 interrupt is generated\par 
+\par 
+\tab Configuration of Event Interrupt Node Pointer Register for Result\par 
+\tab Interrupts:\par 
+\par 
+\tab Configuration of Service Request Nodes 0 - 3 :\par 
+\par 
+\tab Configuration of Limit Check Boundary:\par 
+\par 
+\tab Configuration of Gating source and External Trigger Control:\par 
+\tab - No Gating source selected for Arbitration Source 0\par 
+\par 
+\tab - the trigger input selection is not enabled for source 0\par 
+\par 
+\tab - No Gating source selected for Arbitration Source 1\par 
+\par 
+\tab - the trigger input TRSEL selection is not enabled for Source 1\par 
+\par 
+\tab - No Gating source selected for Arbitration Source 2\par 
+\par 
+\tab - the trigger input TRSEL selection is not enabled for Source 2\par 
+\par 
+\tab Configuration of Conversion Queue Mode Register:Sequential Source 0\par 
+\tab - the gating line is permanently Enabled\par 
+\tab - the external trigger is disabled\par 
+\par 
+\tab Configuration of Conversion Queue Mode Register:Sequential Source 2\par 
+\tab - the gating line is permanently Enabled\par 
+\tab - the external trigger is disabled\par 
+\par 
+\tab Configuration of Conversion Request Mode Registers:Parallel Source\par 
+\tab - the gating line is permanently Enabled\par 
+\tab - the external trigger is disabled\par 
+\tab - the source interrupt is disabled\par 
+\tab - the autoscan functionality is disabled\par 
+\par 
+\tab Configuration of Synchronisation Registers:\par 
+\tab - ADC0 is master\par 
 \par 
 
 }

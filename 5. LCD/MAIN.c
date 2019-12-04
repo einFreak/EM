@@ -12,7 +12,7 @@
 // @Description   This file contains the project initialization function.
 //
 //----------------------------------------------------------------------------
-// @Date          27.11.2019 13:00:45
+// @Date          04.12.2019 12:41:58
 //
 //****************************************************************************
 
@@ -113,7 +113,7 @@ int global_Timer50us = 0;
 // @Parameters    None
 //
 //----------------------------------------------------------------------------
-// @Date          27.11.2019
+// @Date          04.12.2019
 //
 //****************************************************************************
 
@@ -160,8 +160,8 @@ void MAIN_vInit(void)
   //   initializes the General Purpose Timer Unit (GPT2)
   GPT2_vInit();
 
-  //   initializes the Capture / Compare Unit 2 (CAPCOM2)
-  CC2_vInit();
+  //   initializes the Analog / Digital Converter  (ADC0)
+  ADC0_vInit();
 
 
   //   -----------------------------------------------------------------------
@@ -204,7 +204,7 @@ void MAIN_vInit(void)
 // @Parameters    None
 //
 //----------------------------------------------------------------------------
-// @Date          27.11.2019
+// @Date          04.12.2019
 //
 //****************************************************************************
 
@@ -242,7 +242,7 @@ void MAIN_vUnlockProtecReg(void)
 // @Parameters    None
 //
 //----------------------------------------------------------------------------
-// @Date          27.11.2019
+// @Date          04.12.2019
 //
 //****************************************************************************
 
@@ -284,7 +284,7 @@ void MAIN_vLockProtecReg(void)
 // @Parameters    None
 //
 //----------------------------------------------------------------------------
-// @Date          27.11.2019
+// @Date          04.12.2019
 //
 //****************************************************************************
 
@@ -354,7 +354,7 @@ void MAIN_vChangeFreq(void)
 // @Parameters    None
 //
 //----------------------------------------------------------------------------
-// @Date          27.11.2019
+// @Date          04.12.2019
 //
 //****************************************************************************
 
@@ -362,7 +362,7 @@ void MAIN_vChangeFreq(void)
 //wait auslegen auf 100ns
 void wait100ns (unsigned int runtime) {
 	global_Timer100ns = 0;
-	GPT12E_T6CON_T6R = 1; //reset Timer6
+	GPT12E_T5CON_T5R = 1; //reset Timer6
 	while(global_Timer100ns < runtime) {
 		//wait till interupt is executed as often as runtime whises
 	}
@@ -444,7 +444,7 @@ void main(void)
 	//no wait needed
 	
 	//Clear Display 
-	LCDcommand(0x01)
+	LCDcommand(0x01);
 	//wait execution time 1,53ms = 1,53 * 1000 = 1530
 	wait50us(1550/50);
 	
@@ -479,11 +479,12 @@ void main(void)
 	
 	
   // USER CODE END
+
   while(1)
   {
 
    // USER CODE BEGIN (Main,4)
-	wait(500000/50);
+	wait50us(500);
 	P10_OUT_P0 = ~P10_OUT_P0;
 	
 	//TODO Timer 6/7 einstellen auf 100ns/50us

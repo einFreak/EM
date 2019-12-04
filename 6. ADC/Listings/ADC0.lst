@@ -1,0 +1,458 @@
+C166 COMPILER V7.57.0, ADC0                                                                12/04/2019 12:51:44 PAGE 1   
+
+
+C166 COMPILER V7.57.0, COMPILATION OF MODULE ADC0
+OBJECT MODULE PLACED IN .\Objects\ADC0.obj
+COMPILER INVOKED BY: C:\Keil_v5\C166\BIN\C166.EXE ADC0.c MODV2 BROWSE MODV2 DEBUG PRINT(.\Listings\ADC0.lst) TABS(2) OBJ
+                    -ECT(.\Objects\ADC0.obj) 
+
+ stmt lvl     source
+
+    1         //****************************************************************************
+    2         // @Module        Analog / Digital Converter  (ADC0)
+    3         // @Filename      ADC0.c
+    4         // @Project       DAVE-ADC.dav
+    5         //----------------------------------------------------------------------------
+    6         // @Controller    Infineon XE169FH-200F100
+    7         //
+    8         // @Compiler      Keil
+    9         //
+   10         // @Codegenerator 2.1
+   11         //
+   12         // @Description   This file contains functions that use the ADC0 module.
+   13         //
+   14         //----------------------------------------------------------------------------
+   15         // @Date          04.12.2019 12:51:08
+   16         //
+   17         //****************************************************************************
+   18         
+   19         // USER CODE BEGIN (ADC0_General,1)
+   20         
+   21         // USER CODE END
+   22         
+   23         
+   24         
+   25         //****************************************************************************
+   26         // @Project Includes
+   27         //****************************************************************************
+   28         
+   29         #include "MAIN.h"
+   30         
+   31         // USER CODE BEGIN (ADC0_General,2)
+   32         
+   33         // USER CODE END
+   34         
+   35         
+   36         //****************************************************************************
+   37         // @Macros
+   38         //****************************************************************************
+   39         
+   40         // USER CODE BEGIN (ADC0_General,3)
+   41         
+   42         // USER CODE END
+   43         
+   44         
+   45         //****************************************************************************
+   46         // @Defines
+   47         //****************************************************************************
+   48         
+   49         // USER CODE BEGIN (ADC0_General,4)
+   50         
+   51         // USER CODE END
+   52         
+   53         
+   54         //****************************************************************************
+C166 COMPILER V7.57.0, ADC0                                                                12/04/2019 12:51:44 PAGE 2   
+
+   55         // @Typedefs
+   56         //****************************************************************************
+   57         
+   58         // USER CODE BEGIN (ADC0_General,5)
+   59         
+   60         // USER CODE END
+   61         
+   62         
+   63         //****************************************************************************
+   64         // @Imported Global Variables
+   65         //****************************************************************************
+   66         
+   67         // USER CODE BEGIN (ADC0_General,6)
+   68         
+   69         // USER CODE END
+   70         
+   71         
+   72         //****************************************************************************
+   73         // @Global Variables
+   74         //****************************************************************************
+   75         
+   76         // USER CODE BEGIN (ADC0_General,7)
+   77         
+   78         // USER CODE END
+   79         
+   80         
+   81         //****************************************************************************
+   82         // @External Prototypes
+   83         //****************************************************************************
+   84         
+   85         // USER CODE BEGIN (ADC0_General,8)
+   86         
+   87         // USER CODE END
+   88         
+   89         
+   90         //****************************************************************************
+   91         // @Prototypes Of Local Functions
+   92         //****************************************************************************
+   93         
+   94         // USER CODE BEGIN (ADC0_General,9)
+   95         
+   96         // USER CODE END
+   97         
+   98         
+   99         //****************************************************************************
+  100         // @Function      void ADC0_vInit(void) 
+  101         //
+  102         //----------------------------------------------------------------------------
+  103         // @Description   This is the initialization function of the ADC function 
+  104         //                library. It is assumed that the SFRs used by this library 
+  105         //                are in reset state. 
+  106         //                
+  107         //                Following SFR fields will be initialized:
+  108         //                GLOBCTR  - Global Control
+  109         //                RSPR0    - Priority and Arbitration Register
+  110         //                ASENR    - Arbitration slot enable register
+  111         //                CHCTRx   - Channel Control Register x
+  112         //                RCRx     - Result Control Register x
+  113         //                KSCFG    - Module configuration Register
+  114         //                INPCR    - Input class Registers
+  115         //                CHINPRx  - Channel Interrupt register
+  116         //                EVINPRx  - Event Interrupt register
+C166 COMPILER V7.57.0, ADC0                                                                12/04/2019 12:51:44 PAGE 3   
+
+  117         //                SYNCTR   - Synchronisation control register
+  118         //                LCBRx    - Limit check boundary register
+  119         //                PISEL    - Port input selection
+  120         //                QMR0     - Sequential 0 mode register
+  121         //                CRMR1    - Parallel mode register
+  122         //                QMR2     - Sequential 2 mode register
+  123         //
+  124         //----------------------------------------------------------------------------
+  125         // @Returnvalue   None
+  126         //
+  127         //----------------------------------------------------------------------------
+  128         // @Parameters    None
+  129         //
+  130         //----------------------------------------------------------------------------
+  131         // @Date          04.12.2019
+  132         //
+  133         //****************************************************************************
+  134         
+  135         // USER CODE BEGIN (ADC0_Init,1)
+  136         
+  137         // USER CODE END
+  138         
+  139         void ADC0_vInit(void)
+  140         {
+  141  1        volatile unsigned int uwTemp;
+  142  1      
+  143  1        // USER CODE BEGIN (ADC0_Init,2)
+  144  1      
+  145  1        // USER CODE END
+  146  1      
+  147  1        ///  -----------------------------------------------------------------------
+  148  1        ///  Configuration of ADC0 kernel configuration register:
+  149  1        ///  -----------------------------------------------------------------------
+  150  1      
+  151  1        ADC0_KSCFG     =  0x0003;      // load ADC0 kernel configuration register
+  152  1      
+  153  1        ///  - the ADC module clock is enabled
+  154  1        ///  - the ADC module clock = 100,00 MHz
+  155  1      
+  156  1        uwTemp         =  ADC0_KSCFG;  // dummy read to avoid pipeline effects
+  157  1      
+  158  1        ///  -----------------------------------------------------------------------
+  159  1        ///  Configure global control register:
+  160  1        ///  -----------------------------------------------------------------------
+  161  1        ///  --- Conversion Timing -----------------
+  162  1        ///  - Conversion time (CTC) = 00,85 us
+  163  1        ///  - Analog clock is 1/5th of module clock and digital clock is 1/1 times 
+  164  1        ///  of module clock
+  165  1      
+  166  1        ///  - the permanent arbitration mode is selected
+  167  1      
+  168  1        ADC0_GLOBCTR   =  0x0004;      // load global control register
+  169  1      
+  170  1        ///  -----------------------------------------------------------------------
+  171  1        ///  Configuration of Arbitration Slot enable register and also the Source 
+  172  1        ///  Priority register:
+  173  1        ///  -----------------------------------------------------------------------
+  174  1        ///  - Arbitration Slot 0 is enabled
+  175  1        ///  - Arbitration Slot 1 is enabled
+  176  1        ///  - Arbitration Slot 2 is enabled
+  177  1        ///  - the priority of request source 0 is low
+  178  1        ///  - the wait-for-start mode is selected for source 0
+C166 COMPILER V7.57.0, ADC0                                                                12/04/2019 12:51:44 PAGE 4   
+
+  179  1        ///  - the priority of request source 1 is low
+  180  1        ///  - the wait-for-start mode is selected for source 1
+  181  1        ///  - the priority of request source 2 is low
+  182  1        ///  - the wait-for-start mode is selected for source 2
+  183  1      
+  184  1        ADC0_ASENR     =  0x0007;      // load Arbitration Slot enable register
+  185  1      
+  186  1        ADC0_RSPR0     =  0x0000;      // load Priority and Arbitration register
+  187  1      
+  188  1        ///  -----------------------------------------------------------------------
+  189  1        ///  Configuration of Channel Control Registers:
+  190  1        ///  -----------------------------------------------------------------------
+  191  1        ///  Configuration of Channel 0
+  192  1        ///  - the result register0 is selected
+  193  1        ///  - the limit check 0 is selected
+  194  1        ///  - the reference voltage selected is Standard Voltage (Varef)
+  195  1        ///  - the input class selected is Input Class 0
+  196  1        ///  - LCBR0 is selected as upper boundary
+  197  1        ///  - LCBR1 is selected as lower boundary
+  198  1      
+  199  1        ADC0_CHCTR0    =  0x0004;      // load channel control register
+  200  1      
+  201  1        ///  - No ADC0 Channels are selected
+  202  1      
+  203  1        ///  -----------------------------------------------------------------------
+  204  1        ///  Configuration of Sample Time and Resolution:
+  205  1        ///  -----------------------------------------------------------------------
+  206  1      
+  207  1        ///  8 bit resolution selected
+  208  1      
+  209  1        ADC0_INPCR0    =  0x0200;      // load input class0 register
+  210  1      
+  211  1        ///  8 bit resolution selected
+  212  1      
+  213  1        ADC0_INPCR1    =  0x0200;      // load input class1 register
+  214  1      
+  215  1        ///  -----------------------------------------------------------------------
+  216  1        ///  Configuration of Result Control Registers:
+  217  1        ///  -----------------------------------------------------------------------
+  218  1        ///  Configuration of Result Control Register 0
+  219  1        ///  - the data reduction filter is disabled
+  220  1        ///  - the event interrupt is disabled
+  221  1        ///  - the wait-for-read mode is enabled
+  222  1        ///  - the FIFO functionality is disabled
+  223  1      
+  224  1        ADC0_RCR0      =  0x0040;      // load result control register 0
+  225  1      
+  226  1        ///  Configuration of Result Control Register 1
+  227  1        ///  - the data reduction filter is disabled
+  228  1        ///  - the event interrupt is disabled
+  229  1        ///  - the wait-for-read mode is disabled
+  230  1        ///  - the FIFO functionality is disabled
+  231  1      
+  232  1        ADC0_RCR1      =  0x0000;      // load result control register 1
+  233  1      
+  234  1        ///  Configuration of Result Control Register 2
+  235  1        ///  - the data reduction filter is disabled
+  236  1        ///  - the event interrupt is disabled
+  237  1        ///  - the wait-for-read mode is disabled
+  238  1        ///  - the FIFO functionality is disabled
+  239  1      
+  240  1        ADC0_RCR2      =  0x0000;      // load result control register 2
+C166 COMPILER V7.57.0, ADC0                                                                12/04/2019 12:51:44 PAGE 5   
+
+  241  1      
+  242  1        ///  Configuration of Result Control Register 3
+  243  1        ///  - the data reduction filter is disabled
+  244  1        ///  - the event interrupt is disabled
+  245  1        ///  - the wait-for-read mode is disabled
+  246  1        ///  - the FIFO functionality is disabled
+  247  1      
+  248  1        ADC0_RCR3      =  0x0000;      // load result control register 3
+  249  1      
+  250  1        ///  Configuration of Result Control Register 4
+  251  1        ///  - the data reduction filter is disabled
+  252  1        ///  - the event interrupt is disabled
+  253  1        ///  - the wait-for-read mode is disabled
+  254  1        ///  - the FIFO functionality is disabled
+  255  1      
+  256  1        ADC0_RCR4      =  0x0000;      // load result control register 4
+  257  1      
+  258  1        ///  Configuration of Result Control Register 5
+  259  1        ///  - the data reduction filter is disabled
+  260  1        ///  - the event interrupt is disabled
+  261  1        ///  - the wait-for-read mode is disabled
+  262  1        ///  - the FIFO functionality is disabled
+  263  1      
+  264  1        ADC0_RCR5      =  0x0000;      // load result control register 5
+  265  1      
+  266  1        ///  Configuration of Result Control Register 6
+  267  1        ///  - the data reduction filter is disabled
+  268  1        ///  - the event interrupt is disabled
+  269  1        ///  - the wait-for-read mode is disabled
+  270  1        ///  - the FIFO functionality is disabled
+  271  1      
+  272  1        ADC0_RCR6      =  0x0000;      // load result control register 6
+  273  1      
+  274  1        ///  Configuration of Result Control Register 7
+  275  1        ///  - the data reduction filter is disabled
+  276  1        ///  - the event interrupt is disabled
+  277  1        ///  - the wait-for-read mode is disabled
+  278  1        ///  - the FIFO functionality is disabled
+  279  1      
+  280  1        ADC0_RCR7      =  0x0000;      // load result control register 7
+  281  1      
+  282  1        ///  -----------------------------------------------------------------------
+  283  1        ///  Configuration of Channel Interrupt Node Pointer Register:
+  284  1        ///  -----------------------------------------------------------------------
+  285  1        ///  - the SR0 line become activated if channel 0 interrupt is generated
+  286  1      
+  287  1        ADC0_CHINPR0   =  0x0000;      // load channel interrupt node pointer 
+  288  1                                       // register
+  289  1      
+  290  1      
+  291  1        ADC0_CHINPR4   =  0x0000;      // load channel interrupt node pointer 
+  292  1                                       // register
+  293  1      
+  294  1      
+  295  1        ADC0_CHINPR8   =  0x0000;      // load channel interrupt node pointer 
+  296  1                                       // register
+  297  1      
+  298  1      
+  299  1        ADC0_CHINPR12  =  0x0000;      // load channel interrupt node pointer 
+  300  1                                       // register
+  301  1      
+  302  1        ///  -----------------------------------------------------------------------
+C166 COMPILER V7.57.0, ADC0                                                                12/04/2019 12:51:44 PAGE 6   
+
+  303  1        ///  Configuration of Event Interrupt Node Pointer Register for Source 
+  304  1        ///  Interrupts:
+  305  1        ///  -----------------------------------------------------------------------
+  306  1        ///  - the SR 0 line become activated if the event 0 interrupt is generated
+  307  1        ///  - the SR 0 line become activated if the event 1 interrupt is generated
+  308  1        ///  - the SR 0 line become activated if the event 2 interrupt is generated
+  309  1      
+  310  1        ADC0_EVINPR0   =  0x0000;      // load event interrupt set flag register 
+  311  1      
+  312  1        ///  -----------------------------------------------------------------------
+  313  1        ///  Configuration of Event Interrupt Node Pointer Register for Result 
+  314  1        ///  Interrupts:
+  315  1        ///  -----------------------------------------------------------------------
+  316  1      
+  317  1        ADC0_EVINPR8   =  0x0000;      // load event interrupt set flag register 
+  318  1      
+  319  1      
+  320  1        ADC0_EVINPR12  =  0x0000;      // load event interrupt set flag register 
+  321  1      
+  322  1        ///  -----------------------------------------------------------------------
+  323  1        ///  Configuration of Service Request Nodes 0 - 3 :
+  324  1        ///  -----------------------------------------------------------------------
+  325  1      
+  326  1        ///  -----------------------------------------------------------------------
+  327  1        ///  Configuration of Limit Check Boundary:
+  328  1        ///  -----------------------------------------------------------------------
+  329  1      
+  330  1        ADC0_LCBR0     =  0x0198;      // load limit check boundary register 0
+  331  1      
+  332  1        ADC0_LCBR1     =  0x0E64;      // load limit check boundary register 1
+  333  1      
+  334  1        ADC0_LCBR2     =  0x0554;      // load limit check boundary register 2
+  335  1      
+  336  1        ADC0_LCBR3     =  0x0AA8;      // load limit check boundary register 3
+  337  1      
+  338  1        ///  -----------------------------------------------------------------------
+  339  1        ///  Configuration of Gating source and External Trigger Control:
+  340  1        ///  -----------------------------------------------------------------------
+  341  1        ///  - No Gating source selected for Arbitration Source 0
+  342  1      
+  343  1        ///  - the trigger input selection is not enabled for source 0
+  344  1      
+  345  1        ADC0_RSIR0     =  0x0000;      // load external trigger control register 
+  346  1                                       // for Request Source 0
+  347  1      
+  348  1        ///  - No Gating source selected for Arbitration Source 1
+  349  1      
+  350  1        ///  - the trigger input TRSEL selection is not enabled for Source 1
+  351  1      
+  352  1        ADC0_RSIR1     =  0x0000;      // load external trigger control register 
+  353  1                                       // for Request Source 1
+  354  1      
+  355  1        ///  - No Gating source selected for Arbitration Source 2
+  356  1      
+  357  1        ///  - the trigger input TRSEL selection is not enabled for Source 2
+  358  1      
+  359  1        ADC0_RSIR2     =  0x0000;      // load external trigger control register 
+  360  1                                       // for Request Source 2
+  361  1      
+  362  1        ///  -----------------------------------------------------------------------
+  363  1        ///  Configuration of Conversion Queue Mode Register:Sequential Source 0
+  364  1        ///  -----------------------------------------------------------------------
+C166 COMPILER V7.57.0, ADC0                                                                12/04/2019 12:51:44 PAGE 7   
+
+  365  1        ///  - the gating line is permanently Enabled
+  366  1        ///  - the external trigger is disabled
+  367  1      
+  368  1        ADC0_QMR0      =  0x0001;      // load queue mode register
+  369  1      
+  370  1        ///  -----------------------------------------------------------------------
+  371  1        ///  Configuration of Conversion Queue Mode Register:Sequential Source 2
+  372  1        ///  -----------------------------------------------------------------------
+  373  1        ///  - the gating line is permanently Enabled
+  374  1        ///  - the external trigger is disabled
+  375  1      
+  376  1        ADC0_QMR2      =  0x0001;      // load queue mode register
+  377  1      
+  378  1        ///  -----------------------------------------------------------------------
+  379  1        ///  Configuration of Conversion Request Mode Registers:Parallel Source 
+  380  1        ///  -----------------------------------------------------------------------
+  381  1        ///  - the gating line is permanently Enabled
+  382  1        ///  - the external trigger is disabled
+  383  1        ///  - the source interrupt is disabled
+  384  1        ///  - the autoscan functionality is disabled
+  385  1      
+  386  1        ADC0_CRMR1     =  0x0001;      // load conversion request mode register 1
+  387  1      
+  388  1        ///  -----------------------------------------------------------------------
+  389  1        ///  Configuration of Synchronisation Registers:
+  390  1        ///  -----------------------------------------------------------------------
+  391  1        ///  - ADC0 is master 
+  392  1      
+  393  1        ADC0_SYNCTR   |=  0x0010;      // Synchronisation register
+  394  1      
+  395  1        P5_DIDIS       =  0x0001;      // Port 5 Digital input disable register
+  396  1      
+  397  1        ADC0_GLOBCTR  |=  0x0300;      // turn on Analog part
+  398  1      
+  399  1      
+  400  1        // USER CODE BEGIN (ADC0_Init,3)
+  401  1      
+  402  1        // USER CODE END
+  403  1      
+  404  1      } //  End of function ADC0_vInit
+  405         
+  406         
+  407         
+  408         
+  409         // USER CODE BEGIN (ADC0_General,10)
+  410         
+  411         // USER CODE END
+  412         
+*** WARNING C174 IN LINE 381 OF ADC0.c: 'Scs_EnableHighPrecOsc': unreferenced 'static' function
+
+
+MODULE INFORMATION:   INITIALIZED  UNINITIALIZED
+  CODE SIZE        =         206     --------
+  NEAR-CONST SIZE  =    --------     --------
+  FAR-CONST SIZE   =    --------     --------
+  HUGE-CONST SIZE  =    --------     --------
+  XHUGE-CONST SIZE =    --------     --------
+  NEAR-DATA SIZE   =    --------     --------
+  FAR-DATA SIZE    =    --------     --------
+  XHUGE-DATA SIZE  =    --------     --------
+  IDATA-DATA SIZE  =    --------     --------
+  SDATA-DATA SIZE  =    --------     --------
+C166 COMPILER V7.57.0, ADC0                                                                12/04/2019 12:51:44 PAGE 8   
+
+  BDATA-DATA SIZE  =    --------     --------
+  HUGE-DATA SIZE   =    --------     --------
+  BIT SIZE         =    --------     --------
+  INIT'L SIZE      =    --------     --------
+END OF MODULE INFORMATION.
+
+
+C166 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
